@@ -1,8 +1,9 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route} from "react-router-dom";
 
-import Navbar from "./components/navbar.component"
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import Navbar from "./components/navbar.component.js"
+import Homepage from "./components/Homepage.component.js"
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <div className="container">
       <Navbar />
       <br/>
+      <Route path="/" exact component={Homepage} />
       
       </div>
     </Router>
