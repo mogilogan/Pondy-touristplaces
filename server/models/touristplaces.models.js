@@ -1,14 +1,11 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
 
-const reviewSchema = new Schema({
-  comments: { type: String, required: true },
-  id: { type: String },
-}, {
-  timestamps: true,
+
+const commentSchema = mongoose.Schema({
+  comment: String,
 });
 
-const Review = mongoose.model('Review', reviewSchema);
+const Comment = mongoose.model('Comment', commentSchema);
 
-module.exports = Review;
+module.exports = Comment;
