@@ -1,30 +1,23 @@
-import app from "./server.js";
-import mongodb from "mongodb";
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import cors from 'cors';
 
-import dotenv from "dotenv";
+import commentRoutes from './routes/posts.js';
 
-dotenv.config()
+const app = express();
 
-const MongoClient = mongodb.MongoClient
+app.use(bodyParser.json({ limit: '30mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+app.use(cors());
 
-const port = process.env.PORT || 8000
+app.use('/comments', commentRoutes);
 
-MongoClient.connect(
-    process.env.TOURREVIEWS_DB_URI,
-    {
-        maxPoolSize: 50,
-        wtimeoutMS: 2500,
-        useNewUrlParser: true,
-    }
-    )
+const CONNECTION_URL = 'mongodb+srv://js_mastery:123123123@practice.jto9p.mongodb.net/test';
+const PORT = process.env.PORT|| 5000;
 
-    .catch(err => {
-        console.error(err.stack)
-        process.exit(1)
-    })
+mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
+  .catch((error) => console.log(`${error} did not connect`));
 
-    .then(async client => {
-        app.listen(port, () => {
-            console.log(`listening on port ${port}`)
-        })
-    })
+mongoose.set('useFindAndModify', false);
