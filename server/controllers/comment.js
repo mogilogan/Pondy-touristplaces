@@ -26,7 +26,7 @@ export const getComment = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
-
+/* ok*/
 export const createComment = async (req, res) => {
     const { review } = req.body;
 
