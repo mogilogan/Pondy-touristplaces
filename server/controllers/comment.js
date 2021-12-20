@@ -14,7 +14,7 @@ export const getComments = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
-
+// ok let's do it
 export const getComment = async (req, res) => { 
     const { id } = req.params;
 
